@@ -40,7 +40,7 @@ class Circle {
         this.draw = () => {
             c.beginPath()
             c.arc(this.x, this.y, this.radius, 0, (Math.PI * 2), false)
-            // c.strokeStyle = 'red'
+            c.stroke()
             c.fillStyle = this.color
             c.fill()
             c.closePath()
@@ -54,7 +54,7 @@ class Circle {
                 this.dx = -this.dx
             }
             if (this.y + this.radius + this.dy > height || this.y - this.radius < 0) {
-                this.dy = (-this.dy * 0.9)
+                this.dy = (-this.dy * 0.95)
             } else {
                 this.dy += 1
             }
@@ -75,10 +75,10 @@ class Circle {
 let circles = []
 
 function createCircles() {
-    for (let i = 0; i < 1; i++) {
-        const radius = 20
+    for (let i = 0; i < 100; i++) {
+        const radius = 10
         const x = Math.random() * (width - radius * 2) + radius
-        const dx = 0
+        const dx = (Math.random() - 0.5) * 10
         const y = Math.random() * (height - radius * 2) + radius
         const dy = 1
         const circle = new Circle(x, y, dx, dy, radius)
