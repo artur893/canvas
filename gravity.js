@@ -4,8 +4,6 @@ const c = canvas.getContext('2d')
 canvas.width = (window.innerWidth / 2)
 canvas.height = (window.innerHeight / 2)
 
-console.log(canvas)
-
 let width = canvas.width
 let height = canvas.height
 
@@ -52,22 +50,24 @@ class Circle {
             this.draw()
             this.x += this.dx
             this.y += this.dy
-            if (this.x >= (width - this.radius) || this.x <= this.radius) {
+            if (this.x > (width - this.radius) || this.x < this.radius) {
                 this.dx = -this.dx
             }
-            if (this.y >= (height - this.radius) || this.y <= this.radius) {
-                this.dy = -this.dy
+            if (this.y + this.radius + this.dy > height || this.y - this.radius < 0) {
+                this.dy = (-this.dy * 0.9)
+            } else {
+                this.dy += 1
             }
             //interactivity
 
-            if (((mouse.x - this.x < 50) && (mouse.x - this.x > -50) &&
-                ((mouse.y - this.y < 50) && (mouse.y - this.y > -50)))) {
-                if (this.radius < 20) {
-                    this.radius += 1
-                }
-            } else if (this.radius > radius) {
-                this.radius -= 1
-            }
+            // if (((mouse.x - this.x < 50) && (mouse.x - this.x > -50) &&
+            //     ((mouse.y - this.y < 50) && (mouse.y - this.y > -50)))) {
+            //     if (this.radius < 20) {
+            //         this.radius += 1
+            //     }
+            // } else if (this.radius > radius) {
+            //     this.radius -= 1
+            // }
         }
     }
 }
@@ -75,12 +75,12 @@ class Circle {
 let circles = []
 
 function createCircles() {
-    for (let i = 0; i < 1000; i++) {
-        const radius = 5
+    for (let i = 0; i < 1; i++) {
+        const radius = 20
         const x = Math.random() * (width - radius * 2) + radius
-        const dx = (Math.random() - 0.5) * 2
+        const dx = 0
         const y = Math.random() * (height - radius * 2) + radius
-        const dy = (Math.random() - 0.5) * 2
+        const dy = 1
         const circle = new Circle(x, y, dx, dy, radius)
         circles.push(circle)
     }
